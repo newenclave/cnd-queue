@@ -59,13 +59,15 @@ value *back_get( size_t key )
 int main( )
 {
     int i;
+    value v;
+    value *r;
+
     for( i=0; i<BACKETS_COUNT; ++i ) {
         mtx_init(&g_backets[i].mtx_, mtx_plain);
         array_place_init( g_backets[i].dat_ );
         queue_reserve( &g_backets[i].dat_, 8 );
     }
 
-    value v;
     v.data = 1000;
 
     for( size_t i = 0; i<1000000; i++ ) {
@@ -73,7 +75,7 @@ int main( )
         back_add( i, &v );
     }
 
-    value * r = back_get( 117 );
+    r = back_get( 117 );
     if( r ) {
         printf( "%d\n", r->data );
     }
