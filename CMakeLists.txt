@@ -9,13 +9,15 @@ project(cnd-queue)
 
 cmake_minimum_required(VERSION 2.8)
 
-aux_source_directory(. SRC_LIST)
+set(SRC_LIST)
+
+aux_source_directory( . SRC_LIST )
+aux_source_directory( ./tinycthread/source SRC_LIST )
 
 if(NOT WIN32)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long -pedantic")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-long-long -pedantic")
 	add_definitions(-DFUNC_MACRO_NAME=__func__)
-
 else(NOT WIN32)
 	# Force to always compile with W4
 	add_definitions(-DFUNC_MACRO_NAME=__FUNCTION__)
@@ -37,3 +39,6 @@ endif(NOT WIN32)
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 
+if(NOT WIN32)
+        target_link_libraries( ${PROJECT_NAME} "pthread" )
+endif(NOT WIN32)
