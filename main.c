@@ -68,7 +68,7 @@ int main( )
     value v;
     v.data = 1000;
 
-    for( size_t i = 0; i<10000000; i++ ) {
+    for( size_t i = 0; i<1000000; i++ ) {
         v.data = v.data + i;
         back_add( i, &v );
     }
