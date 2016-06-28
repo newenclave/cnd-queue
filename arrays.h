@@ -10,7 +10,6 @@
   #define INLINE_KEYWORD inline
 #endif
 
-
 #define array_define_custom( type, type_name,                                  \
                              allo_f, reallo_f, deallo_f, move_f )              \
     typedef struct _##type_name {                                              \
