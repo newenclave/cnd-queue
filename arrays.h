@@ -107,6 +107,15 @@ int type_name##_insert( type_name *arr, size_t pos, type value )               \
 }                                                                              \
 \
 static inline \
+type *type_name##_emplace_at( type_name *arr, size_t pos )                     \
+{                                                                              \
+    if( type_name##_insert_block( arr, pos, 1 ) ) {                            \
+        return &arr->dat_[pos];                                                \
+    }                                                                          \
+    return NULL;                                                               \
+}                                                                              \
+\
+static inline \
 int type_name##_push_front( type_name *arr, type value )                       \
 {                                                                              \
     return type_name##_insert( arr, 0, value );                                \
